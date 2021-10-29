@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.example.domain.Student;
+import org.example.utils.MybatisUtil;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -50,5 +51,18 @@ public class MyTest {
         session.close();
 
         System.out.println(rows);
+    }
+
+    @Test
+    public void testSelectStudentBYIdByMyUtil() throws IOException {
+        SqlSession session = MybatisUtil.getSqlSession();
+
+        String sqlId = "org.example.Dao.StudentDao.selectStudentById";
+
+        Student student = session.selectOne(sqlId, 1);
+
+        session.close();
+
+        System.out.println(student);
     }
 }
